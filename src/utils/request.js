@@ -2,6 +2,8 @@ import Axios from "axios";
 import Config from "@/config/app";
 import { Notification, Loading } from "element-ui";
 import { getToken } from "../utils/common";
+
+// 使用自定义配置创建一个 Axios 实例
 const service = Axios.create({
   baseURL: Config.apiUrl + "/" + Config.apiPrefix,
   headers: {
@@ -13,6 +15,7 @@ service.defaults.retry = Config.requestRetry;
 service.defaults.retryDelay = Config.requestRetryDelay;
 
 service.interceptors.request.use(
+  // 发送请求前做些什么
   config => {
     if (!config.closeLoading) {
       window.loadingInstance = Loading.service();
@@ -20,12 +23,14 @@ service.interceptors.request.use(
     config.headers["Authorization"] = getToken();
     return config;
   },
+  // 对请求错误做些什么
   error => {
     Promise.reject(error);
   }
 );
 
 service.interceptors.response.use(
+  // 对响应数据做些什么
   res => {
     if (!res.config.closeLoading) {
       window.loadingInstance.close();
@@ -53,6 +58,7 @@ service.interceptors.response.use(
       return res.data.data;
     }
   },
+  // 对响应错误做些什么
   error => {
     window.loadingInstance.close();
     Notification({

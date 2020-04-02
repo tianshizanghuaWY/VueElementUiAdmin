@@ -7,6 +7,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     system: {
+      userName: "千阳",
+      hasMessage: true, // 是否有未处理的消息 -> 控制 BodyTop 里的 is-dot 是都显示
       hideSidebar: Storage.get("HideSidebar"),
       miniSidebar: Storage.get("MiniSidebar"),
       navType: parseInt(Storage.get("NavType") || 1)

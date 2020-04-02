@@ -1,6 +1,6 @@
 <template>
   <div class="body-top">
-    <div class="body-top-btn" @click="hiddenSidebar">
+    <div class="body-top-btn" @click="miniSidebar">
       <i class="el-icon-menu"></i>
     </div>
     <div class="right">
@@ -28,13 +28,13 @@
         </el-dropdown-menu>
       </el-dropdown>
       <span class="body-top-btn">
-        <el-badge is-dot class="badge">
+        <el-badge :is-dot="system.hasMessage" class="badge">
           <i class="el-icon-bell"></i>
         </el-badge>
       </span>
       <el-dropdown>
         <span class="body-top-btn">
-          {{ userName }}
+          {{ system.userName }}
           <i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
@@ -58,13 +58,15 @@ export default {
   name: "BodyTop",
   data() {
     return {
-      menu: Menu,
-      userName: "Admin"
+      menu: Menu
     };
   },
   methods: {
     hiddenSidebar() {
       this.$store.commit("HIDE_SIDEBAR_TOGGLE");
+    },
+    miniSidebar() {
+      this.$store.commit("MINI_SIDEBAR_TOGGLE");
     },
     screenFullToggle() {
       ScreenFull.toggle()
@@ -86,7 +88,7 @@ export default {
 .body-top {
   width: 100%;
   display: flex;
-  height: 50px;
+  height: $--top-height;
   background-color: $--color-primary;
   z-index: 10;
   .body-top-btn {

@@ -2,7 +2,7 @@
   <div
     class="main"
     :class="{
-      hide: system.hideSidebar === 1,
+      hide_ui: system.hideSidebar === 1,
       mini: system.miniSidebar === 1
     }"
   >
@@ -25,7 +25,7 @@ export default {
   name: "App",
   data() {
     return {
-      userName: ""
+      userName: "千阳"
     };
   },
   computed: mapState(["system"]),
@@ -56,19 +56,19 @@ export default {
 }
 .mini {
   .sidebar {
-    width: 64px !important;
-    .sidebar-top {
-      background-color: #222d32 !important;
-    }
-    .icon-left {
-      transform: rotate(180deg);
-    }
+    width: $--mini-sidebar-width !important;
+    // .sidebar-top {
+    //   background-color: #222d32 !important;
+    // }
+    // .icon-left {
+    //   transform: rotate(180deg);
+    // }
   }
   .body {
-    margin-left: 64px !important;
+    margin-left: $--mini-sidebar-width !important;
   }
 }
-.hide {
+.hide_ui {
   .sidebar {
     width: 0 !important;
   }

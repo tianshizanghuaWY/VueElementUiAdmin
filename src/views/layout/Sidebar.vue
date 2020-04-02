@@ -1,13 +1,26 @@
 <template>
   <div class="sidebar-content">
-    <div class="sidebar-top">
-      <img
+    <div class="sidebar-top"
+        :class="{
+          item_center: system.miniSidebar === 1
+        }"
+    >
+      <!-- <img
         class="logo"
         v-if="system.miniSidebar === 1"
         src="../../assets/images/whiteLogo.svg"
         alt=""
       />
-      <span v-else>{{ GlobalCfg.siteName }}</span>
+      <span v-else>{{ GlobalCfg.siteName }}</span> -->
+      <img
+        class="logo"
+        :class="{
+          img_margin: system.miniSidebar === 0
+        }"
+        src="../../assets/images/whiteLogo.svg"
+        alt=""
+      />
+      <span v-show="system.miniSidebar === 0">{{ GlobalCfg.siteName }}</span>
     </div>
     <div class="sidebar-menu">
       <el-menu
@@ -29,7 +42,10 @@
               :key="menuChildren_k"
               :index="menuChildren_v.path"
             >
-              <i class="is-children fa fa-circle-o"></i>
+              <!-- <i class="is-children fa fa-circle-o"></i> -->
+              <i class="is-children"
+                 :class="menuChildren_v.icon"
+              ></i>
               <span slot="title">{{ menuChildren_v.name }}</span>
             </el-menu-item>
           </el-submenu>
@@ -40,11 +56,12 @@
         </template>
       </el-menu>
     </div>
-    <div class="sidebar-bottom" @click="$store.commit('MINI_SIDEBAR_TOGGLE')">
+    <!-- 去掉底部 - wangyuan-->
+    <!-- <div class="sidebar-bottom" @click="$store.commit('MINI_SIDEBAR_TOGGLE')">
       <div class="icon-left">
         <i class="el-icon-back"></i>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -73,19 +90,23 @@ export default {
     color: #fff;
     background-color: mix(#000, $--color-primary, 10%);
     display: flex;
-    justify-content: center;
     align-items: center;
     height: $--top-height;
     span {
       white-space: nowrap;
     }
     .logo {
-      width: 38px;
+      width: $--logo-width;
+    }
+    .img_margin{
+      margin-left: calc((#{$--mini-sidebar-width} - #{$--logo-width}) / 2);
+      margin-right: calc((#{$--mini-sidebar-width} - #{$--logo-width}) / 2);
     }
   }
   .sidebar-menu {
     width: 100%;
-    height: calc(100vh - #{$--top-height} - #{$--top-height});
+    // height: calc(100vh - #{$--top-height} - #{$--top-height});
+    height: calc(100vh - #{$--top-height});
     overflow-y: auto;
     overflow-x: hidden;
   }
@@ -107,6 +128,20 @@ export default {
       font-size: 20px;
       transition: all 0.3s ease-in-out;
     }
+  }
+  .item_center{
+    justify-content: center;
+    align-items: center;
+  }
+
+  // 自定义菜单激活时颜色
+  .el-menu-item.is-active {
+    background-color: $--element-item-active !important;
+    color: #fff;
+  }
+  .el-submenu__title.is-active {
+    background-color: $--element-item-active !important;
+    color: #fff;
   }
 }
 </style>

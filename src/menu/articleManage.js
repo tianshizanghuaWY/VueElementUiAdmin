@@ -6,11 +6,13 @@ export default {
     courseCardList: {
       name: "文章列表",
       permissionsKey: "",
+      icon: "fa fa-list-ul",
       path: "/article_manage/list"
     },
     organCardList: {
       name: "文章分类",
       permissionsKey: "",
+      icon: "fa fa-cubes",
       path: "/articleManage/category"
     }
   }

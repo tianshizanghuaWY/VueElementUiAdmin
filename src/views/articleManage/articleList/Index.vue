@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import { topics } from "@/api/articleManage/list";
+import {topics} from "@/api/articleManage/list";
 import { exportCvsTable } from "@/utils/cvs";
 import { resetObject } from "@/utils/common";
 import Edit from "./Edit.vue";

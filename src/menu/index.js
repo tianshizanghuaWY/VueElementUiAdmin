@@ -8,7 +8,7 @@ let home = {
   name: "首页",
   path: "/",
   permissionsKey: "",
-  icon: "fa fa-tachometer"
+  icon: "fa fa-home home-icon-size" //"fa fa-tachometer"
 };
 
 export default {
